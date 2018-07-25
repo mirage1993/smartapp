@@ -1,0 +1,27 @@
+server:
+  port: 8081
+  tomcat:
+    uri-encoding: utf-8
+spring:
+  application:
+    name: 生产环境
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:MySQL://localhost:3306/sys?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
