@@ -10,8 +10,5 @@
         <module name="smartappstorefront" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="smartappweb" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
 </project>
