@@ -12,4 +12,12 @@
     <groupId>com.smartapp.project</groupId>
     <artifactId>smartappservice</artifactId>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.smartapp.project</groupId>
+            <artifactId>smartappdao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

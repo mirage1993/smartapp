@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>com.smartapp.project</groupId>
-            <artifactId>smartappdao</artifactId>
+            <artifactId>smartappfacades</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
