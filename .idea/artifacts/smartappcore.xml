@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="smartappcore">
+    <output-path>$USER_HOME$/Desktop/smartappcore.jar</output-path>
+    <root id="archive" name="smartappcore.jar" />
+  </artifact>
+</component>

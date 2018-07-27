@@ -7,6 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="smartappcore" />
+        <module name="smartappdao" />
+        <module name="smartappfacades" />
+        <module name="smartappservice" />
         <module name="smartappstorefront" />
       </profile>
     </annotationProcessing>
