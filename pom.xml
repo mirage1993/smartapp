@@ -14,6 +14,7 @@
         <module>smartappdao</module>
         <module>smartappservice</module>
         <module>smartappfacades</module>
+        <module>smartappdao-sqllite</module>
     </modules>
 
     <parent>
