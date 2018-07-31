@@ -1,5 +1,6 @@
 package com.smartapp.project;
 
+import com.smartapp.project.util.SpringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -33,7 +34,6 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
 
     private ConversionService conversionService = new DefaultConversionService();
     private PropertyValues dataSourcePropertyValues;
-    private ApplicationContext applicationContext;
 
     // 如配置文件中未指定数据源类型，使用该默认值
     private static final Object DATASOURCE_TYPE_DEFAULT = "org.apache.tomcat.jdbc.pool.DataSource";
@@ -130,7 +130,7 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
      */
     private void dataBinder(DataSource dataSource, Environment env) {
 //        RelaxedDataBinder dataBinder = new RelaxedDataBinder(dataSource);
-//        //dataBinder.setValidator(new LocalValidatorFactory().run(this.applicationContext));
+//        dataBinder.setValidator(new LocalValidatorFactory().run(this.applicationContext));
 //        dataBinder.setConversionService(conversionService);
 //        dataBinder.setIgnoreNestedProperties(false);//false
 //        dataBinder.setIgnoreInvalidFields(false);//false
@@ -166,6 +166,6 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+        SpringUtils.create().setApplicationContext(applicationContext);
     }
 }

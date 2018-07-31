@@ -6,8 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
@@ -18,8 +16,7 @@ public class SmartApplication {
 
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(SmartApplication.class);
-        ApplicationContext applicationContext = application.run(args);
-        SpringUtils.create().setApplicationContext(applicationContext);
+        application.run(args);
         logger.info("the smart app is running...");
     }
 
