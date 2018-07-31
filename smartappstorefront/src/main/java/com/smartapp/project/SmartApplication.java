@@ -1,13 +1,16 @@
 package com.smartapp.project;
 
+import com.smartapp.project.util.SpringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication
 @EnableTransactionManagement
 public class SmartApplication {
 
@@ -15,7 +18,8 @@ public class SmartApplication {
 
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(SmartApplication.class);
-        application.run(args);
+        ApplicationContext applicationContext = application.run(args);
+        SpringUtils.create().setApplicationContext(applicationContext);
         logger.info("the smart app is running...");
     }
 
