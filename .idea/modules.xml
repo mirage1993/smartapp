@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/smartapp.iml" filepath="$PROJECT_DIR$/smartapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smartappcore/smartappcore.iml" filepath="$PROJECT_DIR$/smartappcore/smartappcore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smartappdao/smartappdao.iml" filepath="$PROJECT_DIR$/smartappdao/smartappdao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smartappdao-sqllite/smartappdao-sqllite.iml" filepath="$PROJECT_DIR$/smartappdao-sqllite/smartappdao-sqllite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smartappfacades/smartappfacades.iml" filepath="$PROJECT_DIR$/smartappfacades/smartappfacades.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smartappservice/smartappservice.iml" filepath="$PROJECT_DIR$/smartappservice/smartappservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smartappstorefront/smartappstorefront.iml" filepath="$PROJECT_DIR$/smartappstorefront/smartappstorefront.iml" />
+    </modules>
+  </component>
+</project>
