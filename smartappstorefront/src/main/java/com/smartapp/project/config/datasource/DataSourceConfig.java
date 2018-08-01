@@ -1,4 +1,4 @@
-package com.smartapp.project.datasource;
+package com.smartapp.project.config.datasource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;

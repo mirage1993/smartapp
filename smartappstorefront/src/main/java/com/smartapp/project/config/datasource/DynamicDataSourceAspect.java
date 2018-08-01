@@ -1,4 +1,4 @@
-package com.smartapp.project.datasource;
+package com.smartapp.project.config.datasource;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;

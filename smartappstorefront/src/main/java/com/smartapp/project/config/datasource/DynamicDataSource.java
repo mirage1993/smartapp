@@ -1,4 +1,4 @@
-package com.smartapp.project.datasource;
+package com.smartapp.project.config.datasource;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
