@@ -1,4 +1,4 @@
-package com.smartapp.project;
+package com.smartapp.project.datasource;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,9 +2,8 @@ package com.smartapp.project.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
-public class SpringUtils implements ApplicationContextAware {
+public class SpringUtils {
 
     private static ApplicationContext applicationContext;
 
@@ -20,7 +19,6 @@ public class SpringUtils implements ApplicationContextAware {
         return new SpringUtils();
     }
 
-    @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         if (SpringUtils.applicationContext == null) {
             SpringUtils.applicationContext = applicationContext;

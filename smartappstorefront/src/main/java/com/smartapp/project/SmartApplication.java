@@ -1,5 +1,6 @@
 package com.smartapp.project;
 
+import com.smartapp.project.util.SpringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +16,7 @@ public class SmartApplication {
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(SmartApplication.class);
         application.run(args);
+        System.out.println(SpringUtils.getApplicationContext());
         logger.info("the smart app is running...");
     }
 

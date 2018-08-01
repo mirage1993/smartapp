@@ -1,4 +1,4 @@
-package com.smartapp.project;
+package com.smartapp.project.datasource;
 
 import com.smartapp.project.util.SpringUtils;
 import org.slf4j.Logger;

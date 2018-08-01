@@ -10,6 +10,5 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.smartapp.project</groupId>
     <artifactId>smartappcore</artifactId>
-    <version>${jar.version}</version>
     <packaging>jar</packaging>
 </project>
