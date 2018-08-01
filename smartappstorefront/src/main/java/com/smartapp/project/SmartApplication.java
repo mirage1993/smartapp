@@ -16,7 +16,6 @@ public class SmartApplication {
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(SmartApplication.class);
         application.run(args);
-        System.out.println(SpringUtils.getApplicationContext());
         logger.info("the smart app is running...");
     }
 
