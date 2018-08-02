@@ -15,7 +15,7 @@
 },
 "aside" : {
   "nav" : {
-    "HEADER" : "Navigation",
+    "HEADER" : "导航",
     "DASHBOARD" : "Dashboard",
     "CALENDAR" : "Calendar",
     "EMAIL" : "Email",
