@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Scope("prototype")
 public class DefaultPageController {
 
-    @GetMapping("/login")
+    @GetMapping("/signin")
     public String login() {
         return "login";
     }

@@ -33,3 +33,9 @@ spring:
       testOnReturn: false
       poolPreparedStatements: true
       maxOpenPreparedStatements: 20
+  security:
+    user:
+      name: admin
+      password: nimda
+      roles: admin
+

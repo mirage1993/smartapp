@@ -1,5 +1,6 @@
 package com.smartapp.project.config.spring.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,25 +9,32 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
-import javax.servlet.Filter;
-
+@Configuration
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private UserAuthDetailsService userAuthDetailsService;
+
+    @Autowired
+    SessionRegistry sessionRegistry;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         CookieCsrfTokenRepository csrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
         csrfTokenRepository.setCookieHttpOnly(true);
-
-        http.csrf()
-                .csrfTokenRepository(csrfTokenRepository)
+        http
+                .formLogin()
+                .loginPage("/signin")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
+                .antMatchers("/signin").permitAll()
                 .antMatchers("/img/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/css/**").permitAll()
@@ -35,24 +43,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/favicon.ico").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/home")
+                .csrf().csrfTokenRepository(csrfTokenRepository)
+                .and()
+                .sessionManagement().maximumSessions(1).sessionRegistry(sessionRegistry)
+                .and()
                 .and()
                 .logout()
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .and()
                 .httpBasic();
-
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .parentAuthenticationManager(authenticationManager())
-                .authenticationProvider(userAuthenticationProvider());
+                .authenticationProvider(userAuthenticationProvider())
+                .userDetailsService(userAuthDetailsService);
     }
 
     @Bean
@@ -62,12 +70,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserAuthenticationProvider userAuthenticationProvider() {
-        return UserAuthenticationProvider.create();
+        return new UserAuthenticationProvider();
     }
 
     @Bean
     public AuthenticationManager authenticationManager() {
         return new UserAuthenticationManager();
+    }
+
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
     }
 
 }
