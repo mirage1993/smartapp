@@ -14,14 +14,5 @@
         <module name="smartappstorefront" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="smartapp" target="1.8" />
-      <module name="smartappcore" target="1.8" />
-      <module name="smartappdao" target="1.8" />
-      <module name="smartappdao-sqllite" target="1.8" />
-      <module name="smartappfacades" target="1.8" />
-      <module name="smartappservice" target="1.8" />
-      <module name="smartappstorefront" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
