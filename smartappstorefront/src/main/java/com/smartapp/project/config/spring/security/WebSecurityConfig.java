@@ -20,9 +20,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserAuthDetailsService userAuthDetailsService;
-
-    @Autowired
     SessionRegistry sessionRegistry;
 
     @Override
@@ -31,10 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         csrfTokenRepository.setCookieHttpOnly(true);
         http
                 .formLogin()
-                .loginPage("/signin")
+                .defaultSuccessUrl("/",true)
+                .loginPage("/signin").loginProcessingUrl("/login").permitAll()
+                .successHandler(userAuthenticationSuccessHandler())
+                .failureHandler(userAuthenticationSuccessHandler())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/signin").permitAll()
                 .antMatchers("/img/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/css/**").permitAll()
@@ -45,10 +44,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().csrfTokenRepository(csrfTokenRepository)
                 .and()
-                .sessionManagement().maximumSessions(1).sessionRegistry(sessionRegistry)
+                .sessionManagement()
+                .invalidSessionUrl("/signin")
+                .maximumSessions(-1)
+                .sessionRegistry(sessionRegistry)
                 .and()
                 .and()
                 .logout()
+                .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
@@ -60,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .authenticationProvider(userAuthenticationProvider())
-                .userDetailsService(userAuthDetailsService);
+                .userDetailsService(userAuthDetailsService());
     }
 
     @Bean
@@ -73,14 +76,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new UserAuthenticationProvider();
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager() {
-        return new UserAuthenticationManager();
-    }
+    //@Bean
+//    public AuthenticationManager authenticationManager() {
+//        return new UserAuthenticationManager();
+//    }
 
     @Bean
     public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
+    }
+
+    @Bean
+    public UserAuthDetailsService userAuthDetailsService(){
+        return new UserAuthDetailsService();
+    }
+
+    @Bean
+    public UserAuthenticationSuccessHandler userAuthenticationSuccessHandler() {
+        return new UserAuthenticationSuccessHandler();
     }
 
     @Autowired
