@@ -13,6 +13,7 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -28,10 +29,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         csrfTokenRepository.setCookieHttpOnly(true);
         http
                 .formLogin()
-                .defaultSuccessUrl("/",true)
+                .defaultSuccessUrl("/", true)
                 .loginPage("/signin").loginProcessingUrl("/login").permitAll()
                 .successHandler(userAuthenticationSuccessHandler())
-                .failureHandler(userAuthenticationSuccessHandler())
+                .failureHandler(userAuthenticationFailureHandler())
                 .and()
                 .authorizeRequests()
                 .antMatchers("/img/**").permitAll()
@@ -51,10 +52,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .and()
                 .logout()
-                .logoutUrl("/logout")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
+                //.logoutSuccessHandler(userLogoutSuccessHandler())
                 .and()
                 .httpBasic();
     }
@@ -87,13 +89,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public UserAuthDetailsService userAuthDetailsService(){
+    public UserAuthDetailsService userAuthDetailsService() {
         return new UserAuthDetailsService();
     }
 
     @Bean
     public UserAuthenticationSuccessHandler userAuthenticationSuccessHandler() {
         return new UserAuthenticationSuccessHandler();
+    }
+
+    @Bean
+    public UserAuthenticationFailureHandler userAuthenticationFailureHandler() {
+        return new UserAuthenticationFailureHandler();
+    }
+
+    @Bean
+    public UserLogoutSuccessHandler userLogoutSuccessHandler() {
+        return new UserLogoutSuccessHandler();
     }
 
     @Autowired
