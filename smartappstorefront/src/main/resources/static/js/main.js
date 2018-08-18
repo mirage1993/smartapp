@@ -12,9 +12,9 @@ angular.module('app')
 
             // config
             $scope.app = {
-                name: '农资开放平台',
+                name: '微信公众平台',
                 version: '1.0.0',
-                footer: '© 2018 Copyright. 农资开放平台',
+                footer: '© 2018 Copyright. 微信公众平台',
                 // for chart colors
                 color: {
                     primary: '#7266ba',
